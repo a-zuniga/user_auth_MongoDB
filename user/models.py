@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, render_template, redirect, flash, url_for, session
 from passlib.hash import pbkdf2_sha256
 import uuid
-import user_database
+import user_database as db
 
 
 class User:
@@ -19,24 +19,30 @@ class User:
         }
 
         # Check for duplicate entries
-        if user_database.check_for_user(user["email"]):
+        if db.check_for_user(user["email"]):
             return False
         else:
-            user_database.add_user(user)
+            db.add_user(user)
             return True
 
 
-    def login(self, user):
-        """Checks for the passed in user on database and assigns a session for them accordignly.
-
-        Keyword arguments:
-        user -- The user to be authenticated
+    def login(self):
+        """Checks for user on database and assigns a session for them accordignly.
         """
-
-        # Checks for user in database
-        session['logged_in'] = True
-        session['user'] = user
-        return jsonify(user), 200
+        # Get user from database by email
+        user_exists = db.check_for_user(request.form.get('email'))
+        user = db.get_user(request.form.get('email'))
+        
+        # Check user credentials
+        if user_exists and pbkdf2_sha256.verify(request.form.get('password'), user['password']):
+            session['username'] = request.form.get('name')
+            return True
+        else:
+            return False
 
     def logout(self):
-        pass
+        if 'username' in session:
+            session.pop('username')
+            return True
+        else:
+            return False

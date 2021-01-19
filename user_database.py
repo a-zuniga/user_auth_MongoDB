@@ -17,6 +17,9 @@ def check_for_user(email):
     else:
         return False
     
+def get_user(email):
+    return collection.find_one({"email" : email})
+    
 # def delete_user(user):
 #     pass
     
