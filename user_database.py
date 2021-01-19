@@ -11,8 +11,8 @@ collection = db["users"]
 def add_user(user):
     return collection.insert_one(user)
 
-def check_for_user(id):
-    if collection.find_one({"_id" : id}):
+def check_for_user(email):
+    if collection.find_one({"email" : email}):
         return True
     else:
         return False
