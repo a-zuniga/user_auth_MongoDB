@@ -1,0 +1,16 @@
+{% include "base.html"%}
+{% include "flash_message.html"%}
+
+{% block content%}
+
+    <h1>Register</h1>
+    <form action="/register" method="POST">
+        <label>Name: </label><input type="text" name="name" id="">
+        <br>
+        <label>Email: </label><input type="email" name="email" id="">
+        <br>
+        <label>Password: </label><input type="password" name="password" id="">
+        <button type="submit" name="submit">Submit</button>
+    </form>
+
+{% endblock %}
