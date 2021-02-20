@@ -1,8 +1,5 @@
-# user_auth_MongoDB
-A playground environment to practice different technologies and its various use cases.
-
 # Introduction
-After participating at PatriotHacks 2021, I was inspired to delve further into Flask. This application is a very simple user authentication. 
+After participating at PatriotHacks 2021, I was inspired to delve further into the world of Flask. This application is a very simple user authentication system that utilizes MongoDB. 
 
 # Built With
 Flask, MongoDB
