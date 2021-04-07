@@ -2,9 +2,10 @@ import pymongo
 from pymongo import MongoClient
 import os
 
+user = os.environ.get("DB_USER")
 secret = os.environ.get("DB_PASS")
 
-cluster = pymongo.MongoClient(f"mongodb+srv://azuniga:{secret}@cluster0.oykhk.mongodb.net/pymongo_auth?retryWrites=true&w=majority")
+cluster = pymongo.MongoClient(f"mongodb+srv://{user}:{secret}@cluster0.oykhk.mongodb.net/pymongo_auth?retryWrites=true&w=majority")
 db = cluster["pymongo_auth"]
 collection = db["users"]
 
